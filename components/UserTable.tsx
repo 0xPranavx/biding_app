@@ -51,7 +51,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users }) => {
               <TableCell>
                 <div className="flex items-center space-x-2">
                   <Avatar>
-                    <AvatarImage src={user.user_profile_url} alt={user.user_name} />
+                    <AvatarImage src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.jpg`} alt={user.user_name} />
                     <AvatarFallback>{user.user_name[0]}</AvatarFallback>
                   </Avatar>
                   <span>{user.user_name}</span>

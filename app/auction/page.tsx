@@ -41,13 +41,13 @@ export default function UsersCarouselPage() {
         return;
       }
 
-    //   const formattedUsers =
-    //     data?.map((u : any) => ({
-    //       ...u,
-    //       owner_name: u.owners?.owner_name ?? null,
-    //     })) || [];
+      const formattedUsers =
+        data?.map((u : any ) => ({
+          ...u,
+          owner_name: u.owners?.owner_name ?? null,
+        })) || [];
 
-      setUsers(data);
+      setUsers(formattedUsers);
     };
 
     fetchUsers();

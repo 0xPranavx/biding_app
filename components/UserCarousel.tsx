@@ -47,7 +47,7 @@ export function UserCarousel({ users }: { users: User[] }) {
               <Card className="shadow-md border rounded-2xl p-4">
                 <CardContent className="flex flex-col items-center text-center gap-3 p-2">
                   <Avatar className="h-16 w-16">
-                    <AvatarImage src={user.user_profile_url} alt={user.user_name} />
+                    <AvatarImage src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.jpg`} alt={user.user_name} />
                     <AvatarFallback>{user.user_name[0]}</AvatarFallback>
                   </Avatar>
 
@@ -68,7 +68,7 @@ export function UserCarousel({ users }: { users: User[] }) {
                   <div className="mt-2">
                     {user.user_sold_flg === "Y" ? (
                       <p className="text-green-600 font-medium">
-                        Sold to: {user.owner_name || "Owner ID " + user.user_owner_id}
+                        Sold to: {user.owner_name || "Owner ID " + user.owner_name}
                       </p>
                     ) : (
                       <p className="text-red-500 font-medium">Not Sold</p>

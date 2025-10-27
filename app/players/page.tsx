@@ -26,7 +26,7 @@ export default function UsersPage() {
       setLoading(true);
       const { data, error } = await supabase
         .from("users")
-        .select("*");
+        .select("*").order('id', { ascending: true });
 
       if (error) {
         console.error("Error fetching users:", error);

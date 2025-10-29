@@ -19,6 +19,7 @@ type User = {
 export default function UsersCarouselPage() {
   const [users, setUsers] = useState<User[]>([]);
 
+
   useEffect(() => {
     const fetchUsers = async () => {
       // 👇 fetch user info along with owner name

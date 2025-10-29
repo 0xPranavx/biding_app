@@ -52,7 +52,7 @@ export default function MainPage() {
 
       setUser({
         ...data,
-        // owner_name: data.owners?.owner_name ?? null,
+        // owner_name: data.owners?.owner_name ?? null, -- pranav
       });
       setLoading(false);
     };

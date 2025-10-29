@@ -21,67 +21,70 @@ type User = {
   user_sold_flg: string;
   user_owner_id: number | null;
   user_profile_url: string;
-  owner_name?: string; // optional if joined with owners table
+  owner_name?: string;
 };
 
 export function UserCarousel({ users }: { users: User[] }) {
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full h-full flex items-center justify-center bg-gray-100 overflow-hidden">
       <Carousel
         opts={{
           align: "start",
           loop: true,
         }}
-        // plugins={[
-        //   Autoplay({
-        //     delay: 4000,
-        //   }),
-        // ]}
+        // plugins={[Autoplay({ delay: 4000 })]}
+        className="w-full h-full"
       >
-        <CarouselContent>
+        <CarouselContent className="h-full">
           {users.map((user) => (
-            <CarouselItem
-              key={user.id}
-              className="md:basis-1/3 lg:basis-1/4"
-            >
-              <Card className="shadow-md border rounded-2xl p-4">
-                <CardContent className="flex flex-col items-center text-center gap-3 p-2">
-                  <Avatar className="h-16 w-16">
-                    <AvatarImage src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.jpg`} alt={user.user_name} />
+           
+            <CarouselItem key={user.id} className="w-full h-full flex items-center justify-center">
+              <Card className="w-full h-full flex items-center justify-center bg-white rounded-none border-none shadow-none">
+                <CardContent className="flex flex-col items-center justify-center text-center gap-6">
+                  <Avatar className="h-32 w-32">
+                    <AvatarImage
+                      src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.jpg`}
+                      alt={user.user_name}
+                    />
                     <AvatarFallback>{user.user_name[0]}</AvatarFallback>
                   </Avatar>
 
-                  <h2 className="font-semibold text-lg">{user.user_name}</h2>
-                  <p className="text-sm text-muted-foreground">
+                  <h2 className="font-bold text-3xl">{user.user_name}</h2>
+                  <p className="text-lg text-muted-foreground">
                     {user.user_type}
                   </p>
 
-                  <div className="flex flex-col gap-1 mt-2">
-                    <p className="text-sm">
+                  <div className="flex flex-col gap-2 mt-4 text-xl">
+                    <p>
                       <strong>Start Price:</strong> ₹{user.user_start_price}
                     </p>
-                    <p className="text-sm">
+                    <p>
                       <strong>Bid Price:</strong> ₹{user.user_bid_price}
                     </p>
                   </div>
 
-                  <div className="mt-2">
+                  <div className="mt-4">
                     {user.user_sold_flg === "Y" ? (
-                      <p className="text-green-600 font-medium">
-                        Sold to: {user.owner_name || "Owner ID " + user.owner_name}
+                      <p className="text-green-600 font-semibold text-xl">
+                        Sold to: {user.owner_name || "Unknown Owner"}
                       </p>
                     ) : (
-                      <p className="text-red-500 font-medium">Not Sold</p>
+                      <p className="text-red-500 font-semibold text-xl">
+                        Not Sold
+                      </p>
                     )}
                   </div>
                 </CardContent>
               </Card>
             </CarouselItem>
+            
+            
           ))}
         </CarouselContent>
+       
 
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="absolute left-6 top-1/2 transform -translate-y-1/2 scale-125" />
+        <CarouselNext className="absolute right-6 top-1/2 transform -translate-y-1/2 scale-125" />
       </Carousel>
     </div>
   );

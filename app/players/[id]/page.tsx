@@ -34,7 +34,14 @@ const Page = () => {
     const [owners, setOwners] = useState<Owner[]>([]);
     const [bidLoading, setBidLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const bidIncrement = 50; // Constant bid increment
+    const [bidCounter, setBidCounter] = useState(0);
+
+    // Initialize bid counter when user loads
+    useEffect(() => {
+        if (user) {
+            setBidCounter(user.user_bid_price);
+        }
+    }, [user]);
 
     // Real-time subscription
     useEffect(() => {
@@ -53,7 +60,10 @@ const Page = () => {
                 },
                 (payload) => {
                     console.log('User update received:', payload);
-                    setUser(payload.new as User);
+                    const updatedUser = payload.new as User;
+                    setUser(updatedUser);
+                    // Update counter to reflect new bid price
+                    setBidCounter(updatedUser.user_bid_price);
                 }
             )
             .subscribe();
@@ -135,17 +145,24 @@ const Page = () => {
         
         setBidLoading(true);
         setMessage("");
-        
-        const newBidAmount = user.user_bid_price + bidIncrement;
 
-        const result = await placeBid(user.id, ownerId, newBidAmount);
+        const result = await placeBid(user.id, ownerId, bidCounter);
 
         if (result.success) {
-            setMessage(`Bid placed successfully! ${ownerName} bid ₹${newBidAmount}`);
+            setMessage(`Bid placed successfully! ${ownerName} bought for ₹${bidCounter}`);
         } else {
             setMessage(`Error: ${result.error}`);
         }
         setBidLoading(false);
+    };
+
+    // Counter controls
+    const increaseBid = (amount: number) => {
+        setBidCounter(prev => prev + amount);
+    };
+
+    const decreaseBid = (amount: number) => {
+        setBidCounter(prev => Math.max(user?.user_start_price || 0, prev - amount));
     };
 
     const fetchUser = async () => {
@@ -278,9 +295,29 @@ const Page = () => {
                     ₹{user.user_start_price.toLocaleString()}
                 </div>
                 
-                {/* Current Bid */}
-                <div className="text-white z-40 text-[32px] mb-2 left-1/2 translate-x-[35%] capitalize font-bold absolute inset-0 flex items-center justify-start">
-                    ₹{user.user_bid_price.toLocaleString()}
+                {/* Current Bid with Increment/Decrement */}
+                <div className="text-white z-40 text-[32px] mb-2 left-1/2 translate-x-[25%] capitalize font-bold absolute inset-0 flex items-center justify-start">
+                    <div className="flex items-center gap-3">
+                        {/* Decrement Button */}
+                        <button
+                            onClick={() => decreaseBid(50)}
+                            disabled={bidCounter <= user.user_start_price}
+                            className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
+                        >
+                            -
+                        </button>
+                        
+                        {/* Current Bid Display */}
+                        <span>₹{bidCounter.toLocaleString()}</span>
+                        
+                        {/* Increment Button */}
+                        <button
+                            onClick={() => increaseBid(50)}
+                            className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-lg font-bold hover:bg-green-700 transition-colors"
+                        >
+                            +
+                        </button>
+                    </div>
                 </div>
 
                 {/* Status Badge */}
@@ -289,199 +326,55 @@ const Page = () => {
                 </div>
             </div>
 
-            {/* Simple Bidding Buttons - Fixed at Bottom */}
-            <div className="fixed bottom-2 left-0 w-full  px-3 z-50">
-  <div className="">
-    <div className="text-center mb-2">
-      <h3 className="text-white text-base font-semibold">
-        Quick Bid (+₹{bidIncrement})
-      </h3>
-      <p className="text-white/60 text-xs">
-        Next bid: ₹{user.user_bid_price + bidIncrement}
-      </p>
-    </div>
+            {/* Bidding Buttons */}
+            <div className="fixed bottom-2 left-0 w-full px-3 z-50">
+                <div className="">
+                    <div className="text-center mb-2">
+                        <h3 className="text-white text-base font-semibold">
+                            Place Bid (₹{bidCounter.toLocaleString()})
+                        </h3>
+                        <p className="text-white/60 text-xs">
+                            Sell player to selected team
+                        </p>
+                    </div>
 
-    {/* Team Buttons */}
-    <div className="flex gap-1.5 justify-center flex-wrap">
-      {owners.map((owner) => (
-        <button
-          key={owner.owner_id}
-          onClick={() => handleBid(owner.owner_id, owner.owner_name)}
-          disabled={
-            bidLoading ||
-            user.user_sold_flg === "Y" ||
-            owner.owner_fund < user.user_bid_price + bidIncrement
-          }
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-3 rounded-lg font-semibold text-xs disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:from-blue-700 hover:to-purple-700 active:scale-95"
-        >
-          <div className="truncate">{owner.owner_name}</div>
-          <div className="text-[10px] opacity-80 truncate">
-            ₹{owner.owner_fund.toLocaleString()}
-          </div>
-        </button>
-      ))}
-    </div>
+                    {/* Team Buttons */}
+                    <div className="flex gap-1.5 justify-center flex-wrap">
+                        {owners.map((owner) => (
+                            <button
+                                key={owner.owner_id}
+                                onClick={() => handleBid(owner.owner_id, owner.owner_name)}
+                                disabled={
+                                    bidLoading ||
+                                    user.user_sold_flg === "Y" ||
+                                    owner.owner_fund < bidCounter
+                                }
+                                className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-2 px-3 rounded-lg font-semibold text-xs disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:from-blue-700 hover:to-purple-700 active:scale-95"
+                            >
+                                <div className="truncate">{owner.owner_name}</div>
+                                <div className="text-[10px] opacity-80 truncate">
+                                    ₹{owner.owner_fund.toLocaleString()}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
 
-    {/* Message */}
-    {message && (
-      <div
-        className={`mt-2 p-1.5 rounded-lg text-center text-xs font-medium ${
-          message.includes("Error") || message.includes("Insufficient")
-            ? "bg-red-500/20 text-red-200 border border-red-500/30"
-            : "bg-green-500/20 text-green-200 border border-green-500/30"
-        }`}
-      >
-        {message}
-      </div>
-    )}
-  </div>
-</div>
-
+                    {/* Message */}
+                    {message && (
+                        <div
+                            className={`mt-2 p-1.5 rounded-lg text-center text-xs font-medium ${
+                                message.includes("Error") || message.includes("Insufficient")
+                                    ? "bg-red-500/20 text-red-200 border border-red-500/30"
+                                    : "bg-green-500/20 text-green-200 border border-green-500/30"
+                            }`}
+                        >
+                            {message}
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
 
 export default Page;
-
-// "use client";
-
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "next/navigation";
-// import { supabase } from "@/lib/supabaseClient"; // Adjust import path as needed
-
-// type User = {
-//     id: number;
-//     created_at: string;
-//     user_name: string;
-//     user_type: string;
-//     user_bid_price: number;
-//     user_start_price: number;
-//     user_sold_flg: string;
-//     user_owner_id: number | null;
-//     user_profile_url: string;
-// };
-
-// const Page = () => {
-//     const params = useParams();
-//     const userId = params.id;
-//     const [user, setUser] = useState<User | null>(null);
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState<string | null>(null);
-
-//     useEffect(() => {
-//         const fetchUser = async () => {
-//             if (!userId) return;
-
-//             try {
-//                 setLoading(true);
-//                 const { data, error } = await supabase
-//                     .from("users")
-//                     .select("*")
-//                     .eq("id", userId)
-//                     .single();
-
-//                 if (error) {
-//                     throw error;
-//                 }
-
-//                 setUser(data);
-//             } catch (err) {
-//                 console.error("Error fetching user:", err);
-//                 setError("Failed to load player data");
-//             } finally {
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchUser();
-//     }, [userId]);
-
-//     if (loading) {
-//         return (
-//             <div className="fixed inset-0 w-screen h-screen overflow-hidden flex items-center justify-center">
-//                 <div className="text-white text-xl">Loading player...</div>
-//             </div>
-//         );
-//     }
-
-//     if (error || !user) {
-//         return (
-//             <div className="fixed inset-0 w-screen h-screen overflow-hidden flex items-center justify-center">
-//                 <div className="text-white text-xl">Player not found</div>
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div className="fixed inset-0 w-screen h-screen overflow-hidden">
-//             {/* Background image (lowest layer) */}
-//             <img
-//                 src="/background.png"
-//                 alt="Background"
-//                 className="absolute inset-0 w-full h-full object-cover -z-50"
-//             />
-
-//             {/* Pattern overlay (above background) */}
-//             <img
-//                 src="/pattern.png"
-//                 alt="Pattern Overlay"
-//                 className="absolute inset-0 w-full h-full object-cover -z-30"
-//             />
-
-
-
-//             <div className="absolute top-2 left-0 gap-4 w-full h-fit flex justify-center items-center">
-//                 <img
-//                     src="/bcca.png"
-//                     alt="Pattern Overlay"
-//                     className="h-30 w-auto object-cover z-20"
-//                 />
-//                 <img
-//                     src="/font-2.png"
-//                     alt="Pattern Overlay"
-//                     className=" w-auto h-30 object-cover z-20"
-//                 />
-//                 <img
-//                     src="/acl.png"
-//                     alt="Pattern Overlay"
-//                     className=" w-auto h-30 object-cover z-20"
-//                 />
-                
-//             </div>
-
-
-//             <div className="absolute flex justify-center items-center left-1/2 translate-x-[-50%] bottom-30 w-full  z-10">
-//                 <img
-//                     src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.jpg`}
-//                     alt={user.user_name}
-//                     className=" absolute bottom-40 w-120 h-120 object-contain -mb-4 z-20"
-//                 />
-                
-//                 <img
-//                     src={`/flash.png`}
-//                     alt={user.user_name}
-//                     className=" absolute bottom-40 w-120 h-120 object-contain -mb-4 z-10"
-//                 />
-//                 <img
-//                     src="/bid-box-2.png"
-//                     alt="Bid Box"
-//                     className="w-auto h-40 z-30 object-contain"
-//                 />
-//                 <div className="text-white z-40 text-[32px] mb-14 capitalize font-bold absolute inset-0 flex items-center justify-center">
-//                     {user.user_name}
-//                 </div>
-//                 <div className="text-white z-40 text-[32px] mb-2 left-1/2 translate-x-[-40%] capitalize font-bold absolute inset-0 flex items-center justify-start">
-//                     {user.user_start_price}
-//                 </div>
-//                 <div className="text-white z-40 text-[32px] mb-2 left-1/2 translate-x-[35%] capitalize font-bold absolute inset-0 flex items-center justify-start">
-//                     {user.user_bid_price}
-//                 </div>
-
-//                 {/* Bid information overlay on the bid box */}
-
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Page;

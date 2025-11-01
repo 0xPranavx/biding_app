@@ -111,7 +111,7 @@ export default function UsersPage() {
               <div className="space-y-2">
                 <h3 className="text-lg font-semibold text-black">No players found</h3>
                 <p className="text-gray-600">
-                  No players match your search for "<span className="font-semibold">{searchQuery}</span>". Try adjusting
+                  No players match your search for "<span className="font-semibold">{searchQuery}</span>" Try adjusting
                   your search terms.
                 </p>
               </div>
@@ -129,14 +129,14 @@ export default function UsersPage() {
             <div className="h-10 w-px bg-gray-300"></div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-black">
-                {users.filter((u) => u.user_sold_flg === "true").length}
+                {users.filter((u) => u.user_sold_flg === "Y").length}
               </div>
               <div className="text-sm text-gray-600 font-medium">Sold Players</div>
             </div>
             <div className="h-10 w-px bg-gray-300"></div>
             <div className="text-center space-y-2">
               <div className="text-3xl font-bold text-black">
-                {users.filter((u) => u.user_sold_flg !== "true").length}
+                {users.filter((u) => u.user_sold_flg === "N").length}
               </div>
               <div className="text-sm text-gray-600 font-medium">Available Players</div>
             </div>

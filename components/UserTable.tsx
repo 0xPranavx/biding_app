@@ -40,7 +40,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users }) => {
   }
 
   const getStatusText = (soldFlag: string): string => {
-    return soldFlag === "true" ? "Sold" : "Available"
+    return soldFlag === "Y" ? "Sold" : "Available"
   }
 
   const getPriceDifference = (bidPrice: number, startPrice: number): { amount: number; isPositive: boolean } => {
@@ -152,7 +152,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users }) => {
                         <Badge
                           variant={getStatusVariant(user.user_sold_flg)}
                           className={`min-w-[80px] justify-center font-medium ${
-                            user.user_sold_flg === "true"
+                            user.user_sold_flg === "Y"
                               ? "bg-black text-white border-black"
                               : "border-gray-300 text-black bg-white"
                           }`}
@@ -176,13 +176,13 @@ export const UserTable: React.FC<UserTableProps> = ({ users }) => {
                 Available
               </Badge>
               <span className="text-sm text-gray-600 font-medium">
-                {users.filter((u) => u.user_sold_flg !== "true").length} players
+                {users.filter((u) => u.user_sold_flg === "N").length} players
               </span>
             </div>
             <div className="flex items-center gap-3">
               <Badge className="bg-black text-white border-black">Sold</Badge>
               <span className="text-sm text-gray-600 font-medium">
-                {users.filter((u) => u.user_sold_flg === "true").length} players
+                {users.filter((u) => u.user_sold_flg === "Y").length} players
               </span>
             </div>
             <div className="flex items-center gap-3 ml-auto">

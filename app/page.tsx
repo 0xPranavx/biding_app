@@ -8,6 +8,8 @@ export default function Home() {
   return (
     <div className="bg-[#0E0915]  flex h-screen flex-col justify-between">
        <Image src={"/fade_gradient.svg"} alt = 'broo' fill className="absolute inset-0 w-screen h-screen object-cover" />
+        <Image src={"/fade_gradient.svg"} alt = 'broo' fill className=" transform rotate-180 absolute inset-0 w-screen h-screen object-cover opacity-25" />
+       
         <nav className="flex justify-between items-center  m-2 p-2 border-b border-white border-dashed border-neutral ">
        <div className="flex flex-row justify-start items-center mr-1 z-10"> <Image src={"/acl.png"} width={50} height={10} alt="logo" />
           {/* <Link href="/"> <h1 className="text-xl font-bold mr-2 text-white">ACL2025</h1> </Link>  */}

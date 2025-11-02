@@ -34,7 +34,7 @@ export default function Home() {
 Discover top players, passionate owners, and the thrill of every bid by click the links below.
       </CardContent>
       <CardFooter className="flex justify-start ">
-        <Button size='lg' className="text-lg border-dashed border-white bg-[#0E0915] text-white z-10 mr-1" variant="outline"><Link href="/players">Players</Link></Button>
+        <Button size='lg' className="text-lg border-dashed border-white bg-[#0E0915] text-white z-10 mr-1" variant="outline"><Link href="/player">Players</Link></Button>
         <Button size='lg' className="text-lg border-dashed border-white bg-[#0E0915] text-white  z-10" variant="outline"><Link href="/owners">Owners</Link></Button>
       </CardFooter>
     </Card>

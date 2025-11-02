@@ -28,22 +28,15 @@ export default function RootLayout({
     <html lang="en">
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        className="bg-[#0E0915]  flex h-screen flex-col justify-between "
+        className="bg-[#0E0915]  "
       >
-         <nav className="flex justify-start items-center mt-2 m-2 p-2 border-b border-blue border-dashed border-neutral ">
-        <Image src={"/acl.png"} width={50} height={10} alt="logo" />
-      
+       
      
-       <Link href="/"> <h1 className="text-xl font-bold mr-2 text-white">ACL2025</h1> </Link>
-      </nav> 
-        <div>
+     
+   
           {children}
-        </div>
-       <footer className="flex justify-start items-center  w-full">
       
-       <p className="text-md p-1 text-white">Made with ♥ by <Link className="text-blue-400" href="https://x.com/0xPranavx">2Players</Link> 
-       . <Link className="text-blue-400" href="https://buymeacoffee.com/praanav9994" >buy me a coffee</Link> to support me.</p>
-      </footer>
+      
          
         
       </body>

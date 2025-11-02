@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <div className="bg-[#0E0915]  flex h-screen flex-col justify-between">
-       <Image src={"/fade_gradient.svg"} alt = 'broo' fill className="absolute inset-0 w-full h-full object-cover" />
-        <nav className="flex justify-start items-center mt-2 m-2 p-2 border-b border-white border-dashed border-neutral ">
-        {/* <Image src={"/acl.png"} width={50} height={10} alt="logo" /> */}
-          <Link href="/"> <h1 className="text-xl font-bold mr-2 text-white">ACL2025</h1> </Link>
+       <Image src={"/fade_gradient.svg"} alt = 'broo' fill className="absolute inset-0 w-screen h-screen object-cover" />
+        <nav className="flex justify-between items-center  m-2 p-2 border-b border-white border-dashed border-neutral ">
+       <div className="flex flex-row justify-start items-center mr-1"> <Image src={"/acl.png"} width={50} height={10} alt="logo" />
+          <Link href="/"> <h1 className="text-xl font-bold mr-2 text-white">ACL2025</h1> </Link> </div>
+           <p className="text-sm p-1 text-white">Made with ♥ by <Link className="text-blue-400" href="https://x.com/0xPranavx">2Players</Link> 
+       . </p>
       </nav> 
       
    <div className="flex justify-center items-center  h-full bg-[#0E0915]">
@@ -18,8 +20,12 @@ export default function Home() {
   
      <Card className=" w-full md:w-6/12 bg-[#0E0915] text-white border-0">
       <CardHeader>
-        <Image src={"/acl.png"} width={100} alt="broo" height={50}/>
-        <CardTitle className="md:text-6xl text-3xl">Ashirwad Champions League</CardTitle>
+        
+      
+          {/* <Image src={"/acl.png"} width={100} alt="broo" height={50}/> */}
+          
+     
+        <CardTitle className="md:text-6xl text-3xl">Ashirwad Champions League   </CardTitle>
         <CardDescription className="md:text-lg ">Powered By BCCA , Special Partner AZMM</CardDescription>
       </CardHeader>
       <CardContent className=" ">
@@ -33,11 +39,11 @@ Discover top players, passionate owners, and the thrill of every bid below.
     </Card>
     
    </div>
-    <footer className="flex justify-start items-center z-10 w-full">
+    {/* <footer className="flex justify-start items-center z-10 w-full">
       
        <p className="text-md p-1 text-white">Made with ♥ by <Link className="text-blue-400" href="https://x.com/0xPranavx">2Players</Link> 
        . <Link className="text-blue-400" href="https://buymeacoffee.com/praanav9994" >buy me a coffee</Link> to support me.</p>
-      </footer>
+      </footer> */}
    </div>
   );
 }

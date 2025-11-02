@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-   <div className="flex justify-center items-center  h-screen w-screen bg-[#0E0915]">
+   <div className="flex justify-center items-center  h-full bg-[#0E0915]">
      <Image src={"/fade_gradient.svg"} alt = 'broo' fill className="absolute inset-0 w-full h-full object-cover" />
   
      <Card className=" w-full md:w-6/12 bg-[#0E0915] text-white border-0">
@@ -15,7 +15,7 @@ export default function Home() {
         <CardTitle className="md:text-6xl text-2xl">Ashirwad Champions League</CardTitle>
         <CardDescription className="md:text-lg ">Powered By BCCA , Special Partner AZMM</CardDescription>
       </CardHeader>
-      <CardContent className="md:text-2xl ">
+      <CardContent className="md: text-2xl ">
       Welcome to one of the most premium cricket auctions Ashirwad Champion league League.
 Discover top players, passionate owners, and the thrill of every bid below.
       </CardContent>

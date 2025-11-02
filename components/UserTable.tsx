@@ -98,7 +98,7 @@ export const UserTable: React.FC<UserTableProps> = ({ users }) => {
                         <div className="flex items-center gap-3">
                           <Avatar className="h-10 w-10 border border-gray-300">
                             <AvatarImage
-                              src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.jpg`}
+                              src={`https://zobdcchizknpihqxfodv.supabase.co/storage/v1/object/public/users_images/${user.id}.png`}
                               alt={user.user_name}
                               className="object-cover"
                             />

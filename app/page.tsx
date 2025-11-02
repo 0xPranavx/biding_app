@@ -1,37 +1,29 @@
 import { Fullscreen } from "lucide-react";
 import Image from "next/image";
+import Link from 'next/link'
+import { Card , CardContent , CardDescription , CardHeader , CardFooter  ,CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-blue-950 font-sans dark:bg-black">
-      <div className="">
-        <Image src= "/wwwhirl.svg" alt="broo" width={100} height={100}  className="absolute left-0 top-0 h-full w-auto object-contain "/>
-      </div>
-           
-      <main className="flex  z-10 min-h-screen w-full max-w-3xl flex-col items-center justify-center py-32 px-16  dark:bg-black sm:items-start">
-       <Image
-          className="dark:invert mb-0"
-          src="/acl.png"
-          alt="Next.js logo"
-          width={150}
-          height={75}
-          priority
-        />
-        
-        <div className="flex flex-col items-center sm:gap-4 gap-2 sm:items-start sm:text-left">
-        
-        
-         <h1 className="max-w-xl text-4xl sm:text-6xl  font-semibold leading-16 tracking-tight text-white dark:text-zinc-50">
-            ASHIRWAD CHAMPIONS LEAGUE
-          </h1>
+   <div className="flex justify-center items-center  h-screen w-screen bg-[#0E0915]">
+     <Image src={"/fade_gradient.svg"} alt = 'broo' fill className="absolute inset-0 w-full h-full object-cover" />
+  
+     <Card className=" w-full md:w-6/12 bg-[#0E0915] text-white border-0">
+      <CardHeader>
+        <Image src={"/acl.png"} width={100} alt="broo" height={50}/>
+        <CardTitle className="md:text-6xl text-2xl">Ashirwad Champions League</CardTitle>
+        <CardDescription className="md:text-lg ">Powered By BCCA , Special Partner AZMM</CardDescription>
+      </CardHeader>
+      <CardContent className="md:text-2xl ">
+      Welcome to one of the most premium cricket auctions Ashirwad Champion league League.
+Discover top players, passionate owners, and the thrill of every bid below.
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button size='lg' className="text-lg border-dashed border-white bg-[#0E0915] text-white" variant="outline"><Link href="/players">Players</Link></Button>
        
-         <p className="sm:text-1xl font-mono text-white"> Powered By Ashirward Board of Cricket League Special partner AZMM</p>
-        
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-         
-        </div>
-      </main>
-    </div>
+      </CardFooter>
+    </Card>
+   </div>
   );
 }

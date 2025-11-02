@@ -9,8 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 
 type Owner = {
   owner_id: number;
@@ -23,15 +24,17 @@ type Owner = {
 
 export function OwnerTable({ owners }: { owners: Owner[] }) {
   return (
-    <Card className="shadow-md border rounded-2xl">
-      <CardContent className="p-6">
+    <Card className="shadow-md w-full bg-[#0E0915] text-white border-0">
+      <CardHeader className="text-2xl">APL Owners</CardHeader>
+       <Image src={"/fade_gradient.svg"} alt = 'broo' fill className="absolute inset-0 w-screen h-screen object-cover" />
+      <CardContent className="text-md text-white">
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Profile</TableHead>
-              <TableHead>Owner Name</TableHead>
-              <TableHead>Team Name</TableHead>
-              <TableHead>Available Fund (₹)</TableHead>
+          <TableHeader className="text-white">
+            <TableRow className="text-white">
+              <TableHead className="text-white">Profile</TableHead>
+              <TableHead className="text-white">Owner Name</TableHead>
+              <TableHead className="text-white">Team Name</TableHead>
+              <TableHead className="text-white">Available Fund (₹)</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -50,7 +53,7 @@ export function OwnerTable({ owners }: { owners: Owner[] }) {
                   </Avatar>
                 </TableCell>
 
-                <TableCell className="font-medium">
+                <TableCell className="font-medium text-md">
                   {owner.owner_name}
                 </TableCell>
                 <TableCell>{owner.owner_team_name}</TableCell>

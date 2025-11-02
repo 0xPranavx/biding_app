@@ -25,8 +25,8 @@ export default function Home() {
           {/* <Image src={"/acl.png"} width={100} alt="broo" height={50}/> */}
           
      
-        <CardTitle className="md:text-6xl text-3xl">Ashirwad Champions League   </CardTitle>
-        <CardDescription className="md:text-lg ">Powered By BCCA , Special Partner AZMM</CardDescription>
+        <CardTitle className="md:text-6xl text-6xl">Ashirwad Champions League</CardTitle>
+        <CardDescription className="md:text-lg ">Powered By BCCA, Special Partner AZMM</CardDescription>
       </CardHeader>
       <CardContent className=" ">
       Welcome to one of the most premium cricket auctions Ashirwad Champion league League.

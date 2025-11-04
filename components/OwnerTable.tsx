@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import { Link } from "lucide-react";
@@ -30,8 +30,9 @@ const router = useRouter();
 
   return (
     <Card className="shadow-md w-full bg-[#0E0915] text-white border-0 z-20">
-      <CardHeader className="text-2xl">APL Owners</CardHeader>
+      <CardHeader className="text-2xl">ACL Owners</CardHeader>
       <Image src={"/fade_gradient.svg"} alt = 'broo' fill className=" transform rotate-180 absolute inset-0 w-screen h-screen object-cover opacity-25" />
+      <CardDescription className="pl-6 text-blue-400" > List of owners details, click on Links below For more details.</CardDescription>
       <CardContent className="text-md text-white">
         <Table>
           <TableHeader className="text-white">

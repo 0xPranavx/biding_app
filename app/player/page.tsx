@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from 'next/image';
 import Link from 'next/link';
@@ -64,6 +64,7 @@ export default function PlayerInfo() {
             </nav> 
      <Card className="shadow-md w-full  bg-[#0E0915] text-white border-0 z-20">
       <CardHeader className="text-2xl">APL Players</CardHeader>
+      <CardDescription className='pl-6 text-blue-400'> List of Players arrange by Highest Bid Price.</CardDescription>
        <Image src={"/fade_gradient.svg"} alt = 'broo' fill className=" transform rotate-180 absolute inset-0 w-screen h-screen object-cover opacity-25" />
       <CardContent className="text-md text-white">
         <Table>

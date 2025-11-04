@@ -33,7 +33,7 @@ export default function Home() {
       </CardHeader>
       <CardContent className=" ">
       Welcome to one of the most premium cricket auctions, Ashirwad Champions League 2025.
-Discover top players, passionate owners, and the thrill of every bid by click the links below.
+Discover top players, passionate owners, and the thrill of every bid by clicking on the links below.
       </CardContent>
       <CardFooter className="flex justify-start ">
         <Button size='lg' className="text-lg border-dashed border-white bg-[#0E0915] text-white z-10 mr-1" variant="outline"><Link href="/player">Players</Link></Button>

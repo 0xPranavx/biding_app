@@ -29,7 +29,7 @@ export default function Home() {
           
      
         <CardTitle className="md:text-6xl text-6xl">Ashirwad Champions League</CardTitle>
-        <CardDescription className="md:text-lg ">Powered By BCCA, Special Partner AZMM</CardDescription>
+        <CardDescription className="md:text-lg ">Special Partner <span className="text-blue-400 text-semibold">AZMM</span></CardDescription>
       </CardHeader>
       <CardContent className=" ">
       Welcome to one of the most premium cricket auctions, Ashirwad Champions League 2025.

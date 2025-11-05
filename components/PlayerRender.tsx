@@ -231,12 +231,15 @@ const PlayerRender = () => {
                 
                 {/* Player Name */}
                 <div className="text-white z-40 text-[32px] mb-14 capitalize font-bold absolute inset-0 flex items-center justify-center">
-                    {user.user_name}
+                    {user.user_name.toUpperCase()}
+                </div>
+                <div className="text-white z-40 text-[30px] mt-22 capitalize font-bold absolute inset-0 flex items-center justify-center">
+                    {user.user_type.toUpperCase()}
                 </div>
                 
                 {/* Start Price */}
                 <div className="text-white z-40 text-[32px] mb-2 left-1/2 translate-x-[-40%] capitalize font-bold absolute inset-0 flex items-center justify-start">
-                    ₹{user.user_start_price.toLocaleString()}
+                    ${user.user_start_price.toLocaleString()}
                 </div>
                 
                 {/* Current Bid with Increment/Decrement */}
@@ -246,18 +249,18 @@ const PlayerRender = () => {
                         <button
                             onClick={() => decreaseBid(50)}
                             disabled={bidCounter <= user.user_start_price}
-                            className="w-8 h-8 bg-black/60   text-white rounded-full flex items-center justify-center text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
+                            className="w-8 h-8 bg-black/60  opacity-25  text-white rounded-full flex items-center justify-center text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
                         >
                             -
                         </button>
                         
                         {/* Current Bid Display */}
-                        <span>₹{bidCounter.toLocaleString()}</span>
+                        <span>${bidCounter.toLocaleString()}</span>
                         
                         {/* Increment Button */}
                         <button
                             onClick={() => increaseBid(50)}
-                            className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-lg font-bold hover:bg-green-700 transition-colors"
+                            className="w-8 h-8 bg-green-600 opacity-25 text-white rounded-full flex items-center justify-center text-lg font-bold hover:bg-green-700 transition-colors"
                         >
                             +
                         </button>
@@ -275,7 +278,7 @@ const PlayerRender = () => {
                 <div className="">
                     <div className="text-center mb-2">
                         <h3 className="text-white text-base font-semibold">
-                            Place Bid (₹{bidCounter.toLocaleString()})
+                            Place Bid (${bidCounter.toLocaleString()})
                         </h3>
                         <p className="text-white/60 text-xs">
                             Sell player to selected team

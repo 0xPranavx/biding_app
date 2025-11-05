@@ -88,7 +88,7 @@ export default function UsersPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="block w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg 
                        bg-white shadow-sm focus:ring-2 focus:ring-black focus:border-black 
-                       text-base placeholder-gray-500 transition-all duration-200 font-medium"
+                       text-base placeholder-gray-500 transition-all duration-200 font-medium text-black"
             />
           </div>
           {searchQuery && (

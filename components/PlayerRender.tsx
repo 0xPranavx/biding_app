@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import Image from "next/image";
 
 type User = {
     id: number;
@@ -247,7 +248,7 @@ const PlayerRender = () => {
                     <div className="flex items-center gap-3">
                         {/* Decrement Button */}
                         <button
-                            onClick={() => decreaseBid(50)}
+                            onClick={() => decreaseBid(500)}
                             disabled={bidCounter <= user.user_start_price}
                             className="w-8 h-8 bg-black/60  opacity-25  text-white rounded-full flex items-center justify-center text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
                         >
@@ -259,7 +260,7 @@ const PlayerRender = () => {
                         
                         {/* Increment Button */}
                         <button
-                            onClick={() => increaseBid(50)}
+                            onClick={() => increaseBid(500)}
                             className="w-8 h-8 bg-green-600 opacity-25 text-white rounded-full flex items-center justify-center text-lg font-bold hover:bg-green-700 transition-colors"
                         >
                             +
@@ -277,12 +278,12 @@ const PlayerRender = () => {
             <div className="fixed bottom-2 left-0 w-full px-3 z-50">
                 <div className="">
                     <div className="text-center mb-2">
-                        <h3 className="text-white text-base font-semibold">
+                        {/* <h3 className="text-white text-base font-semibold">
                             Place Bid (${bidCounter.toLocaleString()})
-                        </h3>
-                        <p className="text-white/60 text-xs">
+                        </h3> */}
+                        {/* <p className="text-white/60 text-xs">
                             Sell player to selected team
-                        </p>
+                        </p> */}
                     </div>
 
                     {/* Team Buttons */}
@@ -296,12 +297,13 @@ const PlayerRender = () => {
                                     user.user_sold_flg === "Y" ||
                                     owner.owner_fund < bidCounter
                                 }
-                                className="bg-linear-to-r from-blue-600 to-purple-600 text-white py-2 px-3 rounded-lg font-semibold text-xs disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:from-blue-700 hover:to-purple-700 active:scale-95"
+                                className="bg-transparent  text-white py-2 px-3 rounded-lg font-semibold text-xs disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:from-blue-700 hover:to-purple-700 active:scale-95"
                             >
-                                <div className="truncate">{owner.owner_name}</div>
-                                <div className="text-[10px] opacity-80 truncate">
-                                    ₹{owner.owner_fund.toLocaleString()}
-                                </div>
+                                {/* <div className="truncate text-base ">{owner.owner_name}</div> */}
+                                    {/* <div className="text-[10px] opacity-80 truncate">
+                                        ₹{owner.owner_fund.toLocaleString()}
+                                    </div> */}
+                                    <Image src={`/${owner.owner_id}.jpeg`} className="bg-transparent" width = '60' height = '60' alt="broo"/>
                             </button>
                         ))}
                     </div>

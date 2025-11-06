@@ -95,7 +95,7 @@ export default function OwnerDetails() {
               <Avatar className=" md:h-30 md:w-30 h-20 w-20 z-10">
        
                     <AvatarImage
-                      src={logoUrl}
+                      src={`/${ownerId}.jpeg  `}
                       alt="broo"
                       className='bg-white'
                     />
